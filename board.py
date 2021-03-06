@@ -24,4 +24,8 @@ def printBoard(board1):
             else:
                 print(str(board1[i][j]) + " ", end = "")
 
-printBoard(board)
+def empty(board1):
+    for i in range(len(board1)):
+        for j in range(len(board1[0])):
+            if board1[i][j] == 0:
+                return (i, j)       # returns row, col NOT col, row
