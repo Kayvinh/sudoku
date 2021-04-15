@@ -10,6 +10,28 @@ board = [
     [0,4,9,2,0,6,0,0,7]
 ]
 
+def solve(board1):
+
+    # base case for recursively backtrack
+    find = empty(board1)        # board is full
+    if not find:
+        return True
+    else:
+        row, col = find
+
+    # recursively inserts numbers 1-9
+    for i in range(1, 10):
+        if valid(board1, i, (row,col)):
+            board1[row][col] = i
+
+            if solve(board1):
+                return True
+
+            board1[row][col] = 0
+        
+    return False
+
+
 def valid(board1, num, pos):
     """
     Checks row and column for valid values
@@ -55,10 +77,18 @@ def printBoard(board1):
 def empty(board1):
     """
     finds all empty 0's on the board
-
     :return: tuple of position as (row,col)
     """
-    for i in range(len(board1)):
-        for j in range(len(board1[0])):
+    for i in range(len(board1)):                # 0 - 9 (col)
+        for j in range(len(board1[0])):         # 0 - 9 (row)
             if board1[i][j] == 0:
-                return (i, j)       # returns row, col NOT col, row
+                return (i, j)       # returns row, col
+
+    return None
+
+
+
+printBoard(board)
+print("========SOLVED=========")
+solve(board)
+printBoard(board)
